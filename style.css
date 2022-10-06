@@ -1,0 +1,28 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#fields {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+#convert {
+  padding: 8px 60px;
+}
+
+.dynamicInputs {
+  display: flex;
+  flex-direction: column;
+}
