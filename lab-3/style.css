@@ -1,0 +1,54 @@
+body {
+  font-size: 24px;
+  background-color: #444;
+}
+
+.sounds {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 50vh;
+  gap: 30px;
+}
+.sound {
+  padding: 40px;
+  background-color: #ffe066;
+  text-align: center;
+}
+
+.records {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.addFields {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.btn {
+  font-size: 24px;
+  width: 9rem;
+  border-radius: 50px;
+}
+
+.recordBtn,
+.playBtn,
+.addFieldBtn {
+  background-color: #37b24d;
+}
+
+.stopBtn {
+  background-color: #f03e3e;
+}
+
+.record-text {
+  color: #ddd;
+}

@@ -3,18 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/lab-3/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <audio src="./sounds/clap.wav" controls id="s1"></audio>
-    <audio src="./sounds/boom.wav" controls id="s2"></audio>
-    <audio src="./sounds/hihat.wav" controls id="s3"></audio>
-    <audio src="./sounds/kick.wav" controls id="s4"></audio>
-    <audio src="./sounds/openhat.wav" controls id="s5"></audio>
-    <audio src="./sounds/ride.wav" controls id="s6"></audio>
-    <audio src="./sounds/snare.wav" controls id="s7"></audio>
-    <audio src="./sounds/tink.wav" controls id="s8"></audio>
-    <audio src="./sounds/tom.wav" controls id="s9"></audio>
+    <div class="sounds">
+      <div class="sound">
+        <audio src="./sounds/clap.wav" id="s1"></audio>
+        1
+      </div>
+      <div class="sound">
+        <audio src="./sounds/boom.wav" id="s2"></audio>
+        2
+      </div>
+      <div class="sound">
+        <audio src="./sounds/hihat.wav" id="s3"></audio>
+        3
+      </div>
+      <div class="sound">
+        <audio src="./sounds/kick.wav" id="s4"></audio>
+        4
+      </div>
+      <div class="sound">
+        <audio src="./sounds/openhat.wav" id="s5"></audio>
+        5
+      </div>
+      <div class="sound">
+        <audio src="./sounds/ride.wav" id="s6"></audio>
+        6
+      </div>
+      <div class="sound">
+        <audio src="./sounds/snare.wav" id="s7"></audio>
+        7
+      </div>
+      <div class="sound">
+        <audio src="./sounds/tink.wav" id="s8"></audio>
+        8
+      </div>
+      <div class="sound">
+        <audio src="./sounds/tom.wav" id="s9"></audio>
+        9
+      </div>
+    </div>
+
+    <div class="records">
+      <div class="record">
+        <span class="record-text">Record 1:</span>
+        <button class="recordBtn btn">Record</button>
+        <button class="stopBtn btn">Stop</button>
+        <button class="playBtn btn">Play</button>
+      </div>
+      <div class="record">
+        <span class="record-text">Record 2:</span>
+        <button class="recordBtn btn">Record</button>
+        <button class="stopBtn btn">Stop</button>
+        <button class="playBtn btn">Play</button>
+      </div>
+      <div class="record">
+        <span class="record-text">Record 3:</span>
+        <button class="recordBtn btn">Record</button>
+        <button class="stopBtn btn">Stop</button>
+        <button class="playBtn btn">Play</button>
+      </div>
+      <div class="record">
+        <span class="record-text">Record 4:</span>
+        <button class="recordBtn btn">Record</button>
+        <button class="stopBtn btn">Stop</button>
+        <button class="playBtn btn">Play</button>
+      </div>
+    </div>
+
+    <div class="addFields">
+      <button class="addFieldBtn btn" id="addField">Add Field</button>
+    </div>
     <script src="drumkit.js"></script>
   </body>
 </html>
