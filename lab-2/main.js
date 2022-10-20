@@ -1,17 +1,11 @@
-// notatnik z zajęć
-const main = document.querySelector("main");
-const timeoutRef = setTimeout(() => {
-  main.innerHTML = "From setTimeout";
-}, 20000);
-let licznik = 0;
-const intervalRef = setInterval(() => {
-  main.innerHTML = "From interval" + licznik++;
-}, 4000);
+const slider = document.querySelector(".slides");
+const slides = document.querySelectorAll(".slide img");
 
-// kasujemy setInterval
-clearInterval(intervalRef);
+const prevBtn = document.querySelector("#button-prev");
+const nextBtn = document.querySelector("#button-next");
 
-// kasujemy setTimeout
-clearTimeout(intervalRef);
+let counter = 0;
 
-// window.requestAnimationFrame
+prevBtn.addEventListener("click", () => {});
+
+nextBtn.addEventListener("click", () => {});
