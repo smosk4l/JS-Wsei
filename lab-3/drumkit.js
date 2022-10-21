@@ -1,17 +1,33 @@
-const recordBtns = document.querySelectorAll(".recordBtn")[0];
-const stopBtns = document.querySelectorAll(".stopBtn")[0];
-const playBtns = document.querySelectorAll(".playBtn")[0];
-
+const recordBtns = document.querySelectorAll(".recordBtn");
+const stopBtns = document.querySelectorAll(".stopBtn");
+const playBtns = document.querySelectorAll(".playBtn");
 const audioEls = document.querySelectorAll("audio");
-const instruments = [];
-const timing = [];
+const records = {};
 
-let isRecording = false;
+let isRecording;
 
 document.addEventListener("keypress", onKeyPress);
 document.addEventListener("keypress", recordSound);
-document.addEventListener("keypress", stopRecording);
-document.addEventListener("keypress", playRecord);
+
+stopBtns.forEach((btn) => {
+  btn.addEventListener("click", stopRecording);
+});
+
+playBtns.forEach((btn) => {
+  btn.addEventListener("click", playRecordedSound);
+});
+
+recordBtns.forEach((btn) => {
+  btn.addEventListener("click", startRecording);
+});
+
+for (let i = 0; i < playBtns.length; i++) {
+  playBtns[i].id = `playBtn${i}`;
+  recordBtns[i].id = `recordBtn${i}`;
+  records[`timing${i}`] = [];
+  records[`instruments${i}`] = [];
+  records[`timeDifference${i}`] = [];
+}
 
 const KeyToSound = {};
 for (let i = 1; i <= audioEls.length; i++) {
@@ -19,7 +35,6 @@ for (let i = 1; i <= audioEls.length; i++) {
 }
 
 function onKeyPress(event) {
-  const values = Object.values(KeyToSound);
   const keys = Object.keys(KeyToSound);
   if (keys.includes(event.key)) {
     const sound = KeyToSound[event.key];
@@ -33,50 +48,45 @@ function playSound(sound) {
   audioTag.play();
 }
 
-const records = {
-  timing1: [],
-  instruments1: [],
-
-  timing2: [],
-  instruments2: [],
-
-  timing3: [],
-  instuments3: [],
-
-  timing4: [],
-  instruments4: [],
-};
+function startRecording() {
+  isRecording = true;
+  recordBtnId = this.id;
+}
 
 function recordSound(event) {
   const keys = Object.keys(KeyToSound);
-
-  if (event.key === "r") {
-    console.log("OK");
-    isRecording = true;
-  }
   if (keys.includes(event.key) && isRecording === true) {
-    timing.push(Date.now());
-    instruments.push(event.key);
-    console.log(timing);
-    console.log(instruments);
-  }
-}
-function stopRecording(event) {
-  if (event.key === "s") {
-    isRecording = false;
-  }
-}
-function playRecord(event) {
-  if (event.key === "p") {
-    const timeDiff = [];
-    timing.forEach((time) => {
-      timeDiff.push(time - timing[0]);
-    });
-    for (let i = 0; i < instruments.length; i++) {
-      setTimeout(() => {
-        playSound(`s${instruments[i]}`);
-      }, timeDiff[i]);
+    for (let i = 0; i < recordBtns.length; i++) {
+      if (recordBtnId === `recordBtn${i}`) {
+        const timing = `timing${i}`;
+        const instrument = `instruments${i}`;
+
+        records[timing].push(Date.now());
+        records[instrument].push(`${event.key}`);
+      }
     }
   }
 }
-// Date.now()
+
+function stopRecording() {
+  isRecording = false;
+}
+
+function playRecordedSound() {
+  playBtnId = this.id;
+  for (let i = 0; i < playBtns.length; i++) {
+    const timing = `timing${i}`;
+    const instrument = `instruments${i}`;
+    const timeDiff = `timeDifference${i}`;
+    if (playBtns[i].id === playBtnId) {
+      for (let j = 0; j < records[timing].length; j++) {
+        records[timeDiff].push(records[timing][j] - records[timing][0]);
+      }
+      for (let j = 0; j < records[instrument].length; j++) {
+        setTimeout(() => {
+          playSound(`s${records[instrument][j]}`);
+        }, records[timeDiff][j]);
+      }
+    }
+  }
+}
