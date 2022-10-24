@@ -8,8 +8,9 @@ body {
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 50vh;
+  height: 20vh;
   gap: 30px;
+  margin-bottom: 3rem;
 }
 .sound {
   padding: 40px;
@@ -51,4 +52,18 @@ body {
 
 .record-text {
   color: #ddd;
+}
+
+.metronome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  color: beige;
+  margin-bottom: 5rem;
+}
+
+#bpm-number {
+  font-size: 2rem;
 }

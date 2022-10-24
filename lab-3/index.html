@@ -37,13 +37,27 @@
         7
       </div>
       <div class="sound">
-        <audio src="./sounds/tink.wav" id="s8"></audio>
+        <audio src="./sounds/tom.wav" id="s8"></audio>
         8
       </div>
       <div class="sound">
-        <audio src="./sounds/tom.wav" id="s9"></audio>
+        <audio src="./sounds/tink.wav" id="s9"></audio>
         9
       </div>
+    </div>
+
+    <div class="metronome">
+      <label for="metronome">Metronome</label>
+      <input type="checkbox" name="metronome" id="metronome-btn" />
+
+      <input
+        type="range"
+        min="0"
+        max="218"
+        name="metronome-range"
+        id="metronome-range"
+      />
+      <span id="bpm-number">0 BPM</span>
     </div>
 
     <div class="records">
@@ -65,6 +79,7 @@
         <button class="stopBtn btn">Stop</button>
         <button class="playBtn btn">Play</button>
       </div>
+
       <div class="record">
         <span class="record-text">Record 4:</span>
         <button class="recordBtn btn">Record</button>

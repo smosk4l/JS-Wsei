@@ -2,12 +2,33 @@ const recordBtns = document.querySelectorAll(".recordBtn");
 const stopBtns = document.querySelectorAll(".stopBtn");
 const playBtns = document.querySelectorAll(".playBtn");
 const audioEls = document.querySelectorAll("audio");
+const metronomeRange = document.querySelector("#metronome-range");
+const metronomeNumber = document.querySelector("#bpm-number");
+const metronomeBtn = document.querySelector("#metronome-btn");
+
 const records = {};
 
 let isRecording;
+let isMetronomeOn;
 
+metronomeBtn.addEventListener("click", function () {
+  metronomeBtn.checked === false
+    ? (isMetronomeOn = false)
+    : (isMetronomeOn = true);
+});
 document.addEventListener("keypress", onKeyPress);
 document.addEventListener("keypress", recordSound);
+metronomeRange.addEventListener("click", function () {
+  const bpmNumber = metronomeRange.value;
+  const bpmTime = (60 / bpmNumber) * 1000;
+  console.log(bpmTime, bpmNumber);
+  metronomeNumber.textContent = `${bpmNumber} BPM`;
+  if (isMetronomeOn && bpmNumber !== "0") {
+    setInterval(() => {
+      playSound("s9");
+    }, bpmTime);
+  }
+});
 
 stopBtns.forEach((btn) => {
   btn.addEventListener("click", stopRecording);
