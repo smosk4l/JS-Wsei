@@ -1,46 +1,24 @@
+const audioEls = document.querySelectorAll("audio");
 const recordBtns = document.querySelectorAll(".recordBtn");
 const stopBtns = document.querySelectorAll(".stopBtn");
 const playBtns = document.querySelectorAll(".playBtn");
-const audioEls = document.querySelectorAll("audio");
 const metronomeRange = document.querySelector("#metronome-range");
 const metronomeNumber = document.querySelector("#bpm-number");
 const metronomeBtn = document.querySelector("#metronome-btn");
+const addFieldBtn = document.querySelector("#addField");
 
-const records = {};
-
+let playBtnId;
+let recordBtnId;
 let isRecording;
 let isMetronomeOn;
+let metronomeInterval;
 
-metronomeBtn.addEventListener("click", function () {
-  metronomeBtn.checked === false
-    ? (isMetronomeOn = false)
-    : (isMetronomeOn = true);
-});
-document.addEventListener("keypress", onKeyPress);
-document.addEventListener("keypress", recordSound);
-metronomeRange.addEventListener("click", function () {
-  const bpmNumber = metronomeRange.value;
-  const bpmTime = (60 / bpmNumber) * 1000;
-  console.log(bpmTime, bpmNumber);
-  metronomeNumber.textContent = `${bpmNumber} BPM`;
-  if (isMetronomeOn && bpmNumber !== "0") {
-    setInterval(() => {
-      playSound("s9");
-    }, bpmTime);
-  }
-});
-
-stopBtns.forEach((btn) => {
-  btn.addEventListener("click", stopRecording);
-});
-
-playBtns.forEach((btn) => {
-  btn.addEventListener("click", playRecordedSound);
-});
-
-recordBtns.forEach((btn) => {
-  btn.addEventListener("click", startRecording);
-});
+const records = {};
+const KeyToSound = {};
+for (let i = 1; i <= audioEls.length; i++) {
+  KeyToSound[i] = audioEls[i - 1].id;
+}
+const keys = Object.keys(KeyToSound);
 
 for (let i = 0; i < playBtns.length; i++) {
   playBtns[i].id = `playBtn${i}`;
@@ -50,17 +28,10 @@ for (let i = 0; i < playBtns.length; i++) {
   records[`timeDifference${i}`] = [];
 }
 
-const KeyToSound = {};
-for (let i = 1; i <= audioEls.length; i++) {
-  KeyToSound[i] = audioEls[i - 1].id;
-}
-
 function onKeyPress(event) {
-  const keys = Object.keys(KeyToSound);
-  if (keys.includes(event.key)) {
-    const sound = KeyToSound[event.key];
-    playSound(sound);
-  }
+  const sound = KeyToSound[event.key];
+  if (!keys.includes(event.key)) return;
+  playSound(sound);
 }
 
 function playSound(sound) {
@@ -75,16 +46,15 @@ function startRecording() {
 }
 
 function recordSound(event) {
-  const keys = Object.keys(KeyToSound);
-  if (keys.includes(event.key) && isRecording === true) {
-    for (let i = 0; i < recordBtns.length; i++) {
-      if (recordBtnId === `recordBtn${i}`) {
-        const timing = `timing${i}`;
-        const instrument = `instruments${i}`;
+  if (!(keys.includes(event.key) && isRecording === true)) return;
 
-        records[timing].push(Date.now());
-        records[instrument].push(`${event.key}`);
-      }
+  for (let i = 0; i < recordBtns.length; i++) {
+    if (recordBtnId === `recordBtn${i}`) {
+      const timing = `timing${i}`;
+      const instrument = `instruments${i}`;
+
+      records[timing].push(Date.now());
+      records[instrument].push(`${event.key}`);
     }
   }
 }
@@ -111,3 +81,41 @@ function playRecordedSound() {
     }
   }
 }
+
+function setMetronomValue() {
+  const bpmNumber = Number(metronomeRange.value);
+  metronomeNumber.textContent = `${bpmNumber} BPM`;
+
+  if (metronomeBtn.checked) {
+    playMetronomeSound(bpmNumber);
+  }
+}
+
+function playMetronomeSound(bpmNumber) {
+  bpmNumber = Number(metronomeRange.value);
+  !metronomeBtn.checked ? (isMetronomeOn = false) : (isMetronomeOn = true);
+  metronomeInterval && clearInterval(metronomeInterval);
+  const bpmTime = (60 / bpmNumber) * 1000;
+  if (isMetronomeOn && bpmNumber !== "0") {
+    metronomeInterval = setInterval(() => {
+      playSound("s9");
+    }, bpmTime);
+  }
+}
+
+stopBtns.forEach((btn) => {
+  btn.addEventListener("click", stopRecording);
+});
+
+playBtns.forEach((btn) => {
+  btn.addEventListener("click", playRecordedSound);
+});
+
+recordBtns.forEach((btn) => {
+  btn.addEventListener("click", startRecording);
+});
+
+document.addEventListener("keypress", onKeyPress);
+document.addEventListener("keypress", recordSound);
+metronomeRange.addEventListener("click", setMetronomValue);
+metronomeBtn.addEventListener("click", playMetronomeSound);
