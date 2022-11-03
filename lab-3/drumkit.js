@@ -28,6 +28,8 @@ for (let i = 0; i < playBtns.length; i++) {
   records[`timeDifference${i}`] = [];
 }
 
+console.log(records);
+
 function onKeyPress(event) {
   const sound = KeyToSound[event.key];
   if (!keys.includes(event.key)) return;
@@ -86,20 +88,23 @@ function setMetronomValue() {
   const bpmNumber = Number(metronomeRange.value);
   metronomeNumber.textContent = `${bpmNumber} BPM`;
 
-  if (metronomeBtn.checked) {
+  if (metronomeBtn.checked && bpmNumber !== 0) {
+    console.log(bpmNumber);
     playMetronomeSound(bpmNumber);
   }
 }
 
 function playMetronomeSound(bpmNumber) {
   bpmNumber = Number(metronomeRange.value);
-  !metronomeBtn.checked ? (isMetronomeOn = false) : (isMetronomeOn = true);
-  metronomeInterval && clearInterval(metronomeInterval);
-  const bpmTime = (60 / bpmNumber) * 1000;
-  if (isMetronomeOn && bpmNumber !== "0") {
-    metronomeInterval = setInterval(() => {
-      playSound("s9");
-    }, bpmTime);
+  if (bpmNumber !== 0) {
+    !metronomeBtn.checked ? (isMetronomeOn = false) : (isMetronomeOn = true);
+    metronomeInterval && clearInterval(metronomeInterval);
+    const bpmTime = (60 / bpmNumber) * 1000;
+    if (isMetronomeOn) {
+      metronomeInterval = setInterval(() => {
+        playSound("s9");
+      }, bpmTime);
+    }
   }
 }
 
