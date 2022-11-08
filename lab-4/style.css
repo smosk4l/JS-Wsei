@@ -1,0 +1,83 @@
+/* General */
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+body {
+  background: linear-gradient(
+    180deg,
+    rgba(165, 216, 255, 1) 0%,
+    rgba(243, 217, 250, 1) 100%
+  );
+  background-attachment: fixed;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+}
+
+/* Notes field */
+.show-field {
+  margin: 3rem 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-none {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.icon {
+  font-size: 3.2rem;
+}
+.icon:active,
+.icon:hover {
+  color: green;
+  stroke: green;
+}
+
+.add-note {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-note-field {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 3rem 3rem 0.8rem 3rem;
+  background-color: #e7f5ff;
+  border-radius: 2.4rem;
+  gap: 0.8rem;
+}
+
+.add-note-btn .icon {
+  margin-top: 2.4rem;
+  font-size: 2rem;
+}
+
+/* Notes */
+
+.notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.note {
+  padding: 10rem;
+  border-radius: 9px;
+  background-color: aliceblue;
+}
