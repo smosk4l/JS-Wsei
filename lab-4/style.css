@@ -13,10 +13,6 @@ body {
   background-attachment: fixed;
 }
 
-.hidden {
-  visibility: hidden;
-}
-
 .container {
   max-width: 120rem;
   margin: 0 auto;
@@ -70,14 +66,30 @@ body {
 
 .notes {
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 1.6rem;
   flex-wrap: wrap;
 }
 
 .note {
-  padding: 10rem;
+  text-align: center;
   border-radius: 9px;
+  padding: 1.2rem 2.4rem;
   background-color: aliceblue;
+  max-width: 40%;
+  max-height: 50%;
+}
+
+.note-title {
+  font-size: 2.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.note-content {
+  font-size: 1.4rem;
+  word-wrap: break-word;
+}
+
+.hidden {
+  display: none;
 }
