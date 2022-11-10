@@ -16,7 +16,7 @@ body {
 .container {
   max-width: 120rem;
   margin: 0 auto;
-  padding: 0 3.2rem;
+  padding: 0 3.2rem 3.2rem 3.2rem;
 }
 
 /* Notes field */
@@ -57,8 +57,10 @@ body {
   gap: 0.8rem;
 }
 
-.add-note-btn .icon {
+.add-note-btn {
   margin-top: 2.4rem;
+}
+.add-note-btn .icon {
   font-size: 2rem;
 }
 
@@ -76,11 +78,12 @@ body {
   border-radius: 9px;
   padding: 1.2rem 2.4rem;
   background-color: aliceblue;
-  max-width: 40%;
-  max-height: 50%;
+  max-width: 100%;
 }
 
 .note-title {
+  word-wrap: break-word;
+
   font-size: 2.4rem;
   margin-bottom: 1.4rem;
 }
@@ -90,6 +93,12 @@ body {
   word-wrap: break-word;
 }
 
+.note-time {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 2rem;
+}
 .hidden {
   display: none;
 }

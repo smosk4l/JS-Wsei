@@ -21,24 +21,29 @@ function createNote() {
   const content = noteContent.value;
   if (!title || !content) alert("Please enter text into field");
   else {
-    notes.push({
-      title,
-      content,
-    });
-
     const note = document.createElement("div");
     const noteTitle = document.createElement("div");
     const noteContent = document.createElement("div");
+    const noteTime = document.createElement("div");
+
+    let time = new Date();
+    time.setHours(time.getHours() + 1);
+    time = time.toISOString().replace("T", " ").slice(0, -5);
+    // time = time.replace("T", " ");
+    // time = time.slice(0, -5);
 
     note.classList = "note";
     noteTitle.className = "note-title";
     noteContent.className = "note-content";
+    noteTime.className = "note-time";
 
     noteTitle.textContent = title;
     noteContent.textContent = content;
+    noteTime.textContent = time;
 
     note.appendChild(noteTitle);
     note.appendChild(noteContent);
+    note.appendChild(noteTime);
     notesEl.appendChild(note);
 
     updateFieldVisibility();
