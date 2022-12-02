@@ -53,6 +53,15 @@ class Ball {
       this.y += this.speedY;
     }
   }
+
+  removeBallFromArr() {
+    balls = balls.filter((ball) => {
+      return (
+        Math.hypot(playerBall.x - ball.x, playerBall.y - ball.y) >=
+        playerBall.radius + ball.radius
+      );
+    });
+  }
 }
 
 function random(min, max) {
@@ -90,21 +99,17 @@ window.addEventListener("deviceorientation", function (event) {
 });
 
 function loop() {
-  ctx.fillStyle = "rgba(0,0,0)";
+  ctx.fillStyle = "bisque";
   ctx.fillRect(0, 0, width, height);
+
   for (let i = 0; i < balls.length; i++) {
     balls[i].drawBall();
     balls[i].updateBall();
+    balls[i].removeBallFromArr();
   }
   playerBall.drawBall();
   playerBall.updateBall("player");
 
-  balls = balls.filter((ball) => {
-    return (
-      Math.hypot(playerBall.x - ball.x, playerBall.y - ball.y) >=
-      playerBall.radius + ball.radius
-    );
-  });
   requestAnimationFrame(loop);
 }
 
