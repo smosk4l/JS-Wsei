@@ -2,15 +2,16 @@
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const balls = [];
+
+let balls = [];
+let beta = 0;
+let gamma = 0;
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 
 canvas.width = width;
 canvas.height = height;
-
-let beta = 0;
-let gamma = 0;
 
 class Ball {
   constructor(x, y, speedX, speedY, radius, color) {
@@ -29,21 +30,19 @@ class Ball {
     ctx.fill();
   }
 
-  updateBall() {
-    if (this.x + this.radius >= width || this.x - this.radius <= 0) {
-      this.speedX = -this.speedX;
-    }
+  updateBall(type = "normal") {
+    if (type === "normal") {
+      if (this.x + this.radius >= width || this.x - this.radius <= 0) {
+        this.speedX = -this.speedX;
+      }
 
-    if (this.y + this.radius >= height || this.y - this.radius <= 0) {
-      this.speedY = -this.speedY;
-    }
+      if (this.y + this.radius >= height || this.y - this.radius <= 0) {
+        this.speedY = -this.speedY;
+      }
 
-    this.x += this.speedX;
-    this.y += this.speedY;
-  }
-
-  updatePlayerBall() {
-    {
+      this.x += this.speedX;
+      this.y += this.speedY;
+    } else {
       if (this.x + this.speedX >= width || this.x + this.speedX <= 0) {
         this.speedX = 0;
       }
@@ -60,7 +59,7 @@ function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-while (balls.length < 1) {
+while (balls.length < 100) {
   const radius = random(10, 20);
   const ball = new Ball(
     random(radius, width - radius),
@@ -73,16 +72,15 @@ while (balls.length < 1) {
   balls.push(ball);
 }
 
+const radius = 50;
 let playerBall = new Ball(
-  random(20, width - 20),
-  random(20, height - 20),
+  random(radius, width - radius),
+  random(radius, height - radius),
   gamma,
   beta,
-  20,
+  radius,
   "#fff"
 );
-
-playerBall.drawBall();
 
 window.addEventListener("deviceorientation", function (event) {
   beta = event.beta / 10;
@@ -99,7 +97,14 @@ function loop() {
     balls[i].updateBall();
   }
   playerBall.drawBall();
-  playerBall.updatePlayerBall();
+  playerBall.updateBall("player");
+
+  balls = balls.filter((ball) => {
+    return (
+      Math.hypot(playerBall.x - ball.x, playerBall.y - ball.y) >=
+      playerBall.radius + ball.radius
+    );
+  });
   requestAnimationFrame(loop);
 }
 
