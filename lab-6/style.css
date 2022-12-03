@@ -7,10 +7,34 @@
   padding: 0;
 }
 
-.ball {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  background: red;
-  position: absolute;
+html {
+  background-color: bisque;
+}
+
+input {
+  text-align: centers;
+}
+
+.menu {
+  margin: 3rem;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  background-color: bisque;
+}
+
+.icon {
+  font-size: 3rem;
+}
+.btn-show {
+  margin-left: 3rem;
+}
+
+.icon-show {
+  font-size: 3rem;
 }

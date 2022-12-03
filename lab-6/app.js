@@ -1,11 +1,18 @@
 "use strict";
 
+const playBtn = document.querySelector(".btn-play");
+const resetBtn = document.querySelector(".btn-reset");
+const menu = document.querySelector(".menu");
+
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+const ballsAmount = 10;
 let balls = [];
+
 let beta = 0;
 let gamma = 0;
+let isPlaying = true;
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -68,13 +75,13 @@ function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-while (balls.length < 100) {
+while (balls.length < ballsAmount) {
   const radius = random(10, 20);
   const ball = new Ball(
     random(radius, width - radius),
     random(radius, height - radius),
-    random(-10, 10),
-    random(-10, 10),
+    random(-1, 1),
+    random(-1, 1),
     radius,
     `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`
   );
@@ -92,15 +99,21 @@ let playerBall = new Ball(
 );
 
 window.addEventListener("deviceorientation", function (event) {
-  beta = event.beta / 10;
+  beta = event.beta / 5;
   gamma = event.gamma / 5;
   playerBall.speedX = gamma;
   playerBall.speedY = beta;
 });
 
 function loop() {
+  isPlaying = true;
   ctx.fillStyle = "bisque";
   ctx.fillRect(0, 0, width, height);
+
+  balls.length === 0 ? (isPlaying = false) : (isPlaying = true);
+  isPlaying ? (menu.style.display = "none") : (menu.style.display = "flex");
+
+  if (!isPlaying) return;
 
   for (let i = 0; i < balls.length; i++) {
     balls[i].drawBall();
@@ -113,4 +126,4 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
-loop();
+playBtn.addEventListener("click", loop);
