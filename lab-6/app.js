@@ -3,11 +3,14 @@
 const playBtn = document.querySelector(".btn-play");
 const resetBtn = document.querySelector(".btn-reset");
 const menu = document.querySelector(".menu");
+const usernameInput = document.querySelector("#username");
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const ballsAmount = 10;
+const ballsAmount = 300;
+
+let playerBall;
 let balls = [];
 
 let beta = 0;
@@ -75,28 +78,34 @@ function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-while (balls.length < ballsAmount) {
-  const radius = random(10, 20);
-  const ball = new Ball(
+function startGame() {
+  isPlaying = true;
+
+  while (balls.length < ballsAmount) {
+    const radius = random(10, 20);
+    const ball = new Ball(
+      random(radius, width - radius),
+      random(radius, height - radius),
+      random(-1, 1),
+      random(-1, 1),
+      radius,
+      `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`
+    );
+    balls.push(ball);
+  }
+
+  const radius = 50;
+  playerBall = new Ball(
     random(radius, width - radius),
     random(radius, height - radius),
-    random(-1, 1),
-    random(-1, 1),
+    gamma,
+    beta,
     radius,
-    `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`
+    "#fff"
   );
-  balls.push(ball);
-}
 
-const radius = 50;
-let playerBall = new Ball(
-  random(radius, width - radius),
-  random(radius, height - radius),
-  gamma,
-  beta,
-  radius,
-  "#fff"
-);
+  loop();
+}
 
 window.addEventListener("deviceorientation", function (event) {
   beta = event.beta / 5;
@@ -106,7 +115,6 @@ window.addEventListener("deviceorientation", function (event) {
 });
 
 function loop() {
-  isPlaying = true;
   ctx.fillStyle = "bisque";
   ctx.fillRect(0, 0, width, height);
 
@@ -126,4 +134,4 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
-playBtn.addEventListener("click", loop);
+playBtn.addEventListener("click", startGame);
