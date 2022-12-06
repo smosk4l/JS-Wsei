@@ -1,20 +1,23 @@
 "use strict";
 
 const playBtn = document.querySelector(".btn-play");
-const resetBtn = document.querySelector(".btn-reset");
+const highscore = document.querySelector(".highscore");
 const menu = document.querySelector(".menu");
-const usernameInput = document.querySelector("#username");
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const ballsAmount = 300;
+const ballsAmount = 1;
 
-let playerBall;
+const times = [];
+const timeDiff = [];
+
 let balls = [];
+let playerBall;
 
 let beta = 0;
 let gamma = 0;
+
 let isPlaying = true;
 
 const width = window.innerWidth;
@@ -80,7 +83,7 @@ function random(min, max) {
 
 function startGame() {
   isPlaying = true;
-
+  times[0] = Date.now();
   while (balls.length < ballsAmount) {
     const radius = random(10, 20);
     const ball = new Ball(
@@ -118,7 +121,13 @@ function loop() {
   ctx.fillStyle = "bisque";
   ctx.fillRect(0, 0, width, height);
 
-  balls.length === 0 ? (isPlaying = false) : (isPlaying = true);
+  if (balls.length === 0) {
+    isPlaying = false;
+    times[1] = Date.now();
+    timeDiff.push((times[1] - times[0]) / 1000);
+    setHighscore(Math.min(...timeDiff));
+  }
+
   isPlaying ? (menu.style.display = "none") : (menu.style.display = "flex");
 
   if (!isPlaying) return;
@@ -134,4 +143,11 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
+function setHighscore(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time - minutes * 60);
+  highscore.textContent = `${
+    String(minutes).length === 1 ? "0" + minutes : minutes
+  }:${String(seconds).length === 1 ? "0" + seconds : seconds}`;
+}
 playBtn.addEventListener("click", startGame);
