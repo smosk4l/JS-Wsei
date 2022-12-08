@@ -144,10 +144,9 @@ function loop() {
 }
 
 function setHighscore(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = Math.floor(time - minutes * 60);
-  highscore.textContent = `${
-    String(minutes).length === 1 ? "0" + minutes : minutes
-  }:${String(seconds).length === 1 ? "0" + seconds : seconds}`;
+  const minutes = `${Math.floor(time / 60)}`.padStart(2, 0);
+  const seconds = `${Math.floor(time - minutes * 60)}`.padStart(2, 0);
+  highscore.textContent = `${minutes}:${seconds}`;
 }
+
 playBtn.addEventListener("click", startGame);
