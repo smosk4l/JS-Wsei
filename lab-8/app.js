@@ -3,7 +3,7 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const ballsAmount = 10;
+const ballsAmount = 30;
 let balls = [];
 
 const width = window.innerWidth;
@@ -12,7 +12,7 @@ const height = window.innerHeight;
 canvas.width = width;
 canvas.height = height;
 
-const y = width * 0.2;
+const y = height * 0.2;
 
 class Ball {
   constructor(x, y, speedX, speedY, radius, color) {
@@ -88,7 +88,16 @@ function loop() {
     balls[i].updateBall();
     // balls[i].removeBallFromArr();
     if (balls[i + 1] !== undefined) {
-      drawLine(balls[i].x, balls[i].y, balls[i + 1].x, balls[i + 1].y);
+    }
+    for (let j = 1; j < balls.length; j++) {
+      // console.log(balls[j].y);
+      const distance = Math.hypot(
+        balls[i].x - balls[j].x,
+        balls[i].y - balls[j].y
+      );
+      if (distance <= y) {
+        drawLine(balls[i].x, balls[i].y, balls[j].x, balls[j].y);
+      }
     }
   }
 
