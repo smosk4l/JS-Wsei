@@ -6,8 +6,8 @@ const playBtn = document.querySelector(".btn-play");
 const highscore = document.querySelector(".highscore");
 const menu = document.querySelector(".menu");
 
-const ballsAmount = 1;
-
+const ballsAmount = 100;
+console.log(ballsAmount);
 const times = [];
 const timeDiff = [];
 
@@ -57,6 +57,13 @@ function createHoles() {
   }
 }
 
+function drawAndUpdateHoles() {
+  balls.forEach((ball) => {
+    ball.drawBall();
+    ball.updateBall();
+  });
+}
+
 function createPlayerBall() {
   const radius = 50;
 
@@ -69,26 +76,26 @@ function createPlayerBall() {
     "#fff"
   );
 }
-window.addEventListener("deviceorientation", function (event) {
+window.addEventListener("deviceorientation", setPlayerBallSpeed);
+
+function setPlayerBallSpeed(event) {
   beta = event.beta / 5;
   gamma = event.gamma / 5;
   playerBall.speedX = gamma;
   playerBall.speedY = beta;
-});
+}
 
 function loop() {
   clearBackground();
   checkIfGameOver();
 
-  if (isPlaying) {
-    for (let i = 0; i < balls.length; i++) {
-      balls[i].drawBall();
-      balls[i].updateBall();
-      removeBallFromArr();
-    }
-    playerBall.drawBall();
-    playerBall.updateBall("player");
-  }
+  if (!isPlaying) return;
+
+  drawAndUpdateHoles();
+  removeBallFromArr();
+
+  playerBall.drawBall();
+  playerBall.updateBall("player");
   requestAnimationFrame(loop);
 }
 
