@@ -1,13 +1,12 @@
 "use strict";
-
 import { Ball, ctx, width, height } from "./ball.js";
+import PlayerBall from "./playerBall.js";
 
 const playBtn = document.querySelector(".btn-play");
 const highscore = document.querySelector(".highscore");
 const menu = document.querySelector(".menu");
-
 const ballsAmount = 100;
-console.log(ballsAmount);
+
 const times = [];
 const timeDiff = [];
 
@@ -67,7 +66,7 @@ function drawAndUpdateHoles() {
 function createPlayerBall() {
   const radius = 50;
 
-  playerBall = new Ball(
+  playerBall = new PlayerBall(
     random(radius, width - radius),
     random(radius, height - radius),
     gamma,
@@ -75,6 +74,7 @@ function createPlayerBall() {
     radius,
     "#fff"
   );
+  console.log(PlayerBall);
 }
 window.addEventListener("deviceorientation", setPlayerBallSpeed);
 

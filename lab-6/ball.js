@@ -25,28 +25,17 @@ class Ball {
     ctx.fill();
   }
 
-  updateBall(type = "normal") {
-    if (type === "normal") {
-      if (this.x + this.radius >= width || this.x - this.radius <= 0) {
-        this.speedX = -this.speedX;
-      }
-
-      if (this.y + this.radius >= height || this.y - this.radius <= 0) {
-        this.speedY = -this.speedY;
-      }
-
-      this.x += this.speedX;
-      this.y += this.speedY;
-    } else {
-      if (this.x + this.speedX >= width || this.x + this.speedX <= 0) {
-        this.speedX = 0;
-      }
-      if (this.y + this.speedY >= height || this.y + this.speedY <= 0) {
-        this.speedY = 0;
-      }
-      this.x += this.speedX;
-      this.y += this.speedY;
+  updateBall() {
+    if (this.x + this.radius >= width || this.x - this.radius <= 0) {
+      this.speedX = -this.speedX;
     }
+
+    if (this.y + this.radius >= height || this.y - this.radius <= 0) {
+      this.speedY = -this.speedY;
+    }
+
+    this.x += this.speedX;
+    this.y += this.speedY;
   }
 }
 export { Ball, canvas, ctx, width, height };
