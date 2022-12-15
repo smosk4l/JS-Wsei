@@ -18,15 +18,6 @@ let gamma = 0;
 
 let isPlaying = true;
 
-function removeBallFromArr() {
-  balls = balls.filter((ball) => {
-    return (
-      Math.hypot(playerBall.x - ball.x, playerBall.y - ball.y) >=
-      playerBall.radius + ball.radius
-    );
-  });
-}
-
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

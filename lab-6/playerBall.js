@@ -1,6 +1,6 @@
 "use strict";
 
-import { Ball, ctx, width, height } from "./ball.js";
+import { Ball, width, height } from "./ball.js";
 
 export default class PlayerBall extends Ball {
   constructor(x, y, speedX, speedY, radius, color) {
