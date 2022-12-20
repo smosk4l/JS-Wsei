@@ -5,27 +5,17 @@
 }
 
 body {
-  /* #2ecc71 */
-  background-color: rgba(46, 204, 113, 0.7);
+  background-color: #0b7285;
   width: 100vw;
   height: 100vh;
 }
 
-.weather {
+.search {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.weather-field {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.6rem 3.2rem;
   gap: 1.6rem;
   margin-top: 3.2rem;
-  border-radius: 9px;
-  border: 2px solid #222;
-  /* background-color: #c0f0d4; */
 }
 
 input {
@@ -37,17 +27,21 @@ input {
   border-radius: 9px;
   padding: 12px;
 }
-.weather-icon {
-  font-size: 2.4rem;
+.search-icon {
+  font-size: 3rem;
   cursor: pointer;
 }
 
 .weather-card {
+  margin-top: 3.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 1.6rem;
 }
 
 .card {
+  background-color: red;
+  /*padding: 12rem 6rem;*/
 }

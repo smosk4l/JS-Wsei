@@ -9,16 +9,20 @@
     <script defer src="/lab-9/solution.js"></script>
   </head>
   <body>
+    <div class="search">
+      <input type="text" placeholder="Search" />
+      <button class="search-btn">
+        <ion-icon class="icon search-icon" name="search-outline"></ion-icon>
+      </button>
+    </div>
+
     <div class="weather">
-      <div class="weather-field">
-        <input class="weather-input" type="text" />
-        <btn class="weather-btn">
-          <ion-icon class="weather-icon" name="search-outline"></ion-icon>
-        </btn>
-      </div>
-      <div class="weather-card">
-        <div class="card"></div>
-      </div>
+      <h2 class="city">Weather in Krakow</h2>
+      <div class="temp">10°C</div>
+      <img src="" alt="" class="weather-icon" />
+      <div class="description">Snow</div>
+      <div class="humidity">Humidity: 60%</div>
+      <div class="wind">Wind speed: 6.2 km/h</div>
     </div>
     <script
       type="module"

@@ -7,6 +7,7 @@ checkBtn.addEventListener("click", checkWeather);
 function checkWeather() {
   const city = cityInput.value;
   cityInput.value = "";
+  cityInput.
 
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`
@@ -16,3 +17,4 @@ function checkWeather() {
       if (data.cod === 200) console.log(data);
     });
 }
+
