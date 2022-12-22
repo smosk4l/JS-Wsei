@@ -1,3 +1,7 @@
+/* 
+  Colors: #0b7285
+          #e9f6ff:
+*/
 * {
   margin: 0;
   padding: 0;
@@ -31,19 +35,38 @@ body {
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  background-color: #000000d0;
-  color: white;
-  padding: 2em;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #e9f6ff;
+  padding: 1rem 2rem 2rem 2rem;
   border-radius: 30px;
   width: 100%;
   max-width: 420px;
   margin: 1em;
 }
 
-.card .city {
+.city {
   align-self: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
+.temp {
+  font-size: 1.8rem;
+}
+
+.weather-icon {
+  align-self: center;
+  border: 1px solid #e9f6ff;
+  border-radius: 50%;
+  background-color: #e9f6ff;
+  margin-bottom: 2rem;
+}
+
+.description,
+.humidity,
+.wind {
+  font-size: 1.1rem;
+}
 input {
   background-color: #e9f6ff;
   font-size: 1.8rem;
@@ -57,12 +80,17 @@ input {
 button {
   border-radius: 50%;
   border: none;
-  background-color: #000000d0;
+  background-color: #0b7285;
 }
-.search-icon {
+.icon {
   font-size: 3rem;
   cursor: pointer;
-  color: white;
+  color: #e9f6ff;
+}
+
+.delete-btn {
+  background-color: rgba(0, 0, 0, 0);
+  align-self: flex-end;
 }
 
 .weather-card {
