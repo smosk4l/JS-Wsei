@@ -3,7 +3,9 @@ const cityInput = document.querySelector(".weather-input");
 const weatherEl = document.querySelector(".weather");
 const menuOptionsEl = document.querySelector(".dropdown-content");
 
-const cities = [];
+const cities = localStorage.getItem("cities")
+  ? localStorage.getItem("cities").split(",")
+  : [];
 
 let cityObject;
 
@@ -89,10 +91,7 @@ function getCitiesFromLocalStorage() {
   return localStorage.getItem("cities").split(",");
 }
 function init() {
-  const cities = getCitiesFromLocalStorage();
-  if (!cities) return;
-
-  console.log(cities);
+  if (cities.length === 0) return;
   updateWeatherUI(JSON.parse(localStorage.getItem(cities[0])));
   updateMenuUI();
 }
