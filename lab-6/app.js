@@ -90,6 +90,14 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
+function removeBallFromArr() {
+  balls = balls.filter((ball) => {
+    return (
+      Math.hypot(playerBall.x - ball.x, playerBall.y - ball.y) >=
+      playerBall.radius + ball.radius
+    );
+  });
+}
 function clearBackground() {
   ctx.fillStyle = "bisque";
   ctx.fillRect(0, 0, width, height);
