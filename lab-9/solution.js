@@ -1,6 +1,9 @@
 const checkBtn = document.querySelector(".search-btn");
 const cityInput = document.querySelector(".weather-input");
 const weatherEl = document.querySelector(".weather");
+const menuOptionsEl = document.querySelector(".dropdown-content");
+
+const cities = [];
 
 const apiKey = "1a42eb189c06352349faade92b23e721";
 
@@ -13,7 +16,8 @@ function checkWeather() {
     `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`
   )
     .then((response) => response.json())
-    .then((data) => updateWeatherUI(data));
+    .then((data) => localStorage.setItem(city, JSON.stringify(data)))
+    .then(() => updateWeatherUI(JSON.parse(localStorage.getItem(city))));
 }
 
 function updateWeatherUI(data) {
@@ -30,9 +34,6 @@ function updateWeatherUI(data) {
 
   const html = `
   <div class="card">
-    <button class="delete-btn">
-      <ion-icon class="icon close-icon" name="close-outline"></ion-icon>
-    </button>
     <h2 class="city">Weather in ${cityName}</h2>
     <div class="temp">${Math.round(temp)}°C</div>
     <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="" class="weather-icon" />
@@ -41,5 +42,30 @@ function updateWeatherUI(data) {
     <div class="wind">Wind speed: ${speed} km/h</div>
   </?div>`;
 
+  removeAllChildNodes(weatherEl);
+
   weatherEl.insertAdjacentHTML("afterbegin", html);
+
+  updateMenuUI(cityName);
+}
+
+function updateMenuUI(city) {
+  if (cities.includes(city)) return;
+  if (cities.length >= 11) cities.pop();
+  cities.unshift(city);
+
+  removeAllChildNodes(menuOptionsEl);
+
+  for (let city of cities) {
+    const html = `
+    <a href="#">${city}</a>
+    `;
+    menuOptionsEl.insertAdjacentHTML("afterbegin", html);
+  }
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }

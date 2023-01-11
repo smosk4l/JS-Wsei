@@ -14,14 +14,16 @@ body {
   height: 100vh;
 }
 
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.6rem;
+.search-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.1fr 1fr;
+  /* gap: 1.6rem; */
   margin: 3.2rem 0;
 }
 
+.weather-input {
+  grid-column: 2/3;
+}
 .weather {
   display: flex;
   align-items: center;
@@ -58,7 +60,9 @@ body {
   align-self: center;
   border: 1px solid #e9f6ff;
   border-radius: 50%;
-  background-color: #e9f6ff;
+  /* background-color: #e9f6ff;
+   */
+  background-color: #0b7285;
   margin-bottom: 2rem;
 }
 
@@ -88,11 +92,6 @@ button {
   color: #e9f6ff;
 }
 
-.delete-btn {
-  background-color: rgba(0, 0, 0, 0);
-  align-self: flex-end;
-}
-
 .weather-card {
   margin-top: 3.2rem;
   display: flex;
@@ -100,4 +99,36 @@ button {
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.6rem;
+}
+
+.dropdown {
+  grid-column: -1;
+}
+.dropbtn {
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  margin-right: 4rem;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100%;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
