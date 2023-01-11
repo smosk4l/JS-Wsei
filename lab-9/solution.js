@@ -5,6 +5,8 @@ const menuOptionsEl = document.querySelector(".dropdown-content");
 
 const cities = [];
 
+let cityObject;
+
 const apiKey = "1a42eb189c06352349faade92b23e721";
 
 checkBtn.addEventListener("click", checkWeather);
@@ -16,8 +18,13 @@ function checkWeather() {
     `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`
   )
     .then((response) => response.json())
-    .then((data) => localStorage.setItem(city, JSON.stringify(data)))
-    .then(() => updateWeatherUI(JSON.parse(localStorage.getItem(city))));
+    .then((data) => (cityObject = data))
+    .then(() =>
+      localStorage.setItem(cityObject.name, JSON.stringify(cityObject))
+    )
+    .then(() =>
+      updateWeatherUI(JSON.parse(localStorage.getItem(cityObject.name)))
+    );
 }
 
 function updateWeatherUI(data) {
@@ -46,21 +53,26 @@ function updateWeatherUI(data) {
 
   weatherEl.insertAdjacentHTML("afterbegin", html);
 
-  updateMenuUI(cityName);
+  saveCity(cityName);
+  updateMenuUI();
 }
 
-function updateMenuUI(city) {
+function saveCity(city) {
   if (cities.includes(city)) return;
   if (cities.length >= 11) cities.pop();
   cities.unshift(city);
 
+  localStorage.setItem("cities", cities);
+}
+
+function updateMenuUI() {
   removeAllChildNodes(menuOptionsEl);
 
   for (let city of cities) {
     const html = `
     <a href="#">${city}</a>
     `;
-    menuOptionsEl.insertAdjacentHTML("afterbegin", html);
+    menuOptionsEl.insertAdjacentHTML("beforeend", html);
   }
 }
 
@@ -69,3 +81,20 @@ function removeAllChildNodes(parent) {
     parent.removeChild(parent.firstChild);
   }
 }
+
+function getCitiesFromLocalStorage() {
+  if (localStorage.length === 0 || localStorage.getItem("cities") === null)
+    return;
+
+  return localStorage.getItem("cities").split(",");
+}
+function init() {
+  const cities = getCitiesFromLocalStorage();
+  if (!cities) return;
+
+  console.log(cities);
+  updateWeatherUI(JSON.parse(localStorage.getItem(cities[0])));
+  updateMenuUI();
+}
+
+init();
