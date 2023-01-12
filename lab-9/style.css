@@ -115,20 +115,28 @@ button {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 100%;
+  min-width: 180px;
+  max-width: 200px;
 }
 
-.dropdown-content a {
+.dropdown-content .menu-option {
   color: black;
   padding: 12px 16px;
-  text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {
+.dropdown-content .menu-option:hover {
   background-color: #ddd;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.menu-option {
+  color: black;
+  border: none;
+  border-radius: 0;
+  background-color: #f1f1f1;
+  width: 100%;
 }

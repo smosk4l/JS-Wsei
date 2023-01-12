@@ -72,12 +72,18 @@ function updateMenuUI() {
 
   for (let city of cities) {
     const html = `
-    <a href="#">${city}</a>
+    <button class="menu-option">${city}</button>
     `;
     menuOptionsEl.insertAdjacentHTML("beforeend", html);
   }
+  const menuOptionsBtns = document.querySelectorAll(".menu-option");
+  for (let btn of menuOptionsBtns) {
+    btn.addEventListener("click", () => {
+      cityInput.value = btn.textContent;
+      checkWeather();
+    });
+  }
 }
-
 function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
@@ -97,3 +103,5 @@ function init() {
 }
 
 init();
+
+// menuOptionsBtns[0].addEventListener("click", () => console.log("OK"));
