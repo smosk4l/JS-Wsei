@@ -1,11 +1,28 @@
-const slider = document.querySelector(".slides");
-const slides = document.querySelectorAll(".slide img");
+const slides = document.querySelectorAll(".slide");
 
-const prevBtn = document.querySelector("#button-prev");
-const nextBtn = document.querySelector("#button-next");
+const btnLeft = document.querySelector(".slider__btn--left");
+const btnRight = document.querySelector(".slider__btn--right");
 
-let counter = 0;
+const maxSlide = slides.length - 1;
+let curSlide = 0;
 
-prevBtn.addEventListener("click", () => {});
+const goToSlide = function (slide) {
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${(i - slide) * 100}%)`;
+  });
+};
 
-nextBtn.addEventListener("click", () => {});
+goToSlide(0);
+
+const nextSlide = function () {
+  curSlide === maxSlide ? (curSlide = 0) : curSlide++;
+  goToSlide(curSlide);
+};
+
+const prevSlide = function () {
+  curSlide === 0 ? (curSlide = maxSlide) : curSlide--;
+  goToSlide(curSlide);
+};
+
+btnRight.addEventListener("click", nextSlide);
+btnLeft.addEventListener("click", prevSlide);
