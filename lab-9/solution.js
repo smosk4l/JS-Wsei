@@ -1,3 +1,4 @@
+"use strict";
 const checkBtn = document.querySelector(".search-btn");
 const cityInput = document.querySelector(".weather-input");
 const weatherEl = document.querySelector(".weather");
@@ -61,9 +62,8 @@ function updateWeatherUI(data) {
 
 function saveCity(city) {
   if (cities.includes(city)) return;
-  if (cities.length >= 11) cities.pop();
+  if (cities.length > 9) cities.pop();
   cities.unshift(city);
-
   localStorage.setItem("cities", cities);
 }
 
@@ -84,18 +84,13 @@ function updateMenuUI() {
     });
   }
 }
+
 function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
 }
 
-function getCitiesFromLocalStorage() {
-  if (localStorage.length === 0 || localStorage.getItem("cities") === null)
-    return;
-
-  return localStorage.getItem("cities").split(",");
-}
 function init() {
   if (cities.length === 0) return;
   updateWeatherUI(JSON.parse(localStorage.getItem(cities[0])));
@@ -103,5 +98,3 @@ function init() {
 }
 
 init();
-
-// menuOptionsBtns[0].addEventListener("click", () => console.log("OK"));
