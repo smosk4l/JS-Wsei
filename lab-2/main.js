@@ -2,6 +2,7 @@ const slides = document.querySelectorAll(".slide");
 
 const btnLeft = document.querySelector(".slider__btn--left");
 const btnRight = document.querySelector(".slider__btn--right");
+const dotContainer = document.querySelector(".dots");
 
 const maxSlide = slides.length - 1;
 let curSlide = 0;
