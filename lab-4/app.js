@@ -1,53 +1,42 @@
-// "use strict";
-const showFieldBtn = document.querySelector(".show-field-btn");
-const addNoteBtn = document.querySelector(".add-note-btn");
-const addNoteField = document.querySelector(".add-note-field");
-const notesEl = document.querySelector(".notes");
-const noteTitle = document.querySelector("#title");
-const noteContent = document.querySelector("#content");
+const addNoteBtn = document.querySelector(".btn-add-note");
+const noteTitleField = document.querySelector(".note--title");
+const noteContentField = document.querySelector(".note--content");
+const notesListEl = document.querySelector(".notes__list");
+
 const notes = [];
 
-showFieldBtn.addEventListener("click", updateFieldVisibility);
-addNoteBtn.addEventListener("click", createNote);
+function saveNote() {
+  const title = noteTitleField.value;
+  const content = noteContentField.value;
 
-function updateFieldVisibility() {
-  addNoteField.classList.toggle("hidden");
-  noteTitle.value = "";
-  noteContent.value = "";
+  let date = new Date();
+  date.setHours(date.getHours() + 1);
+  date = date.toISOString().replace("T", " ").slice(0, -5);
+
+  const note = {
+    title: title,
+    content: content,
+    date: date,
+  };
+
+  notes.push(note);
+}
+function updateUI() {
+  const note = notes.at(-1);
+  console.log(note);
+  const html = `
+  <div class="notes__list--item notes__list-item--selected">
+    <div class="note__small--title">${note.title}</div>
+    <div class="note__small--content">${note.content}</div>
+    <div class="note__small--updated">${note.date}</div>
+  </div>
+  `;
+
+  notesListEl.insertAdjacentHTML("beforeend", html);
+}
+function addNote() {
+  saveNote();
+  updateUI();
 }
 
-function createNote() {
-  const title = noteTitle.value;
-  const content = noteContent.value;
-  if (!title || !content) alert("Please enter text into field");
-  else {
-    const note = document.createElement("div");
-    const noteTitle = document.createElement("div");
-    const noteContent = document.createElement("div");
-    const noteTime = document.createElement("div");
-
-    let time = new Date();
-    time.setHours(time.getHours() + 1);
-    time = time.toISOString().replace("T", " ").slice(0, -5);
-    // time = time.replace("T", " ");
-    // time = time.slice(0, -5);
-
-    note.classList = "note";
-    noteTitle.className = "note-title";
-    noteContent.className = "note-content";
-    noteTime.className = "note-time";
-
-    noteTitle.textContent = title;
-    noteContent.textContent = content;
-    noteTime.textContent = time;
-
-    note.appendChild(noteTitle);
-    note.appendChild(noteContent);
-    note.appendChild(noteTime);
-    notesEl.appendChild(note);
-
-    updateFieldVisibility();
-  }
-}
-
-function create() {}
+addNoteBtn.addEventListener("click", addNote);

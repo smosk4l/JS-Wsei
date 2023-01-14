@@ -21,13 +21,15 @@ function checkWeather() {
     `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`
   )
     .then((response) => response.json())
-    .then((data) => (cityObject = data))
-    .then(() =>
-      localStorage.setItem(cityObject.name, JSON.stringify(cityObject))
-    )
-    .then(() =>
-      updateWeatherUI(JSON.parse(localStorage.getItem(cityObject.name)))
-    );
+    .then((data) => {
+      cityObject = data;
+      localStorage.setItem(cityObject.name, JSON.stringify(cityObject));
+    })
+    .then(() => {
+      updateWeatherUI(JSON.parse(localStorage.getItem(cityObject.name)));
+      saveCity(cityObject.name);
+      updateMenuUI();
+    });
 }
 
 function updateWeatherUI(data) {
@@ -55,9 +57,6 @@ function updateWeatherUI(data) {
   removeAllChildNodes(weatherEl);
 
   weatherEl.insertAdjacentHTML("afterbegin", html);
-
-  saveCity(cityName);
-  updateMenuUI();
 }
 
 function saveCity(city) {

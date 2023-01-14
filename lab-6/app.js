@@ -5,7 +5,7 @@ import PlayerBall from "./playerBall.js";
 const playBtn = document.querySelector(".btn-play");
 const highscore = document.querySelector(".highscore");
 const menu = document.querySelector(".menu");
-const ballsAmount = 100;
+const ballsAmount = 1;
 
 const times = [];
 const timeDiff = [];
