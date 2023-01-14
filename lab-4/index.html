@@ -4,64 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notekeep</title>
+    <title>Note keeper</title>
     <link rel="stylesheet" href="/lab-4/style.css" />
     <script defer src="/lab-4/app.js"></script>
   </head>
   <body>
-    <div class="container">
-      <div class="show-field">
-        <button class="show-field-btn btn-none">
-          <ion-icon name="add-circle-outline" class="icon"></ion-icon>
-        </button>
-      </div>
-      <div class="add-note">
-        <div class="add-note-field hidden">
-          <input type="text" name="title" id="title" placeholder="Note title" />
-          <textarea
-            name="content"
-            id="content"
-            placeholder="Note content"
-          ></textarea>
-          <button class="add-note-btn btn-none">
-            <ion-icon name="checkmark-outline" class="icon"></ion-icon>
-          </button>
+    <div class="notes">
+      <div class="sidebar">
+        <button class="btn btn-add-note">Add Note</button>
+        <div class="notes__list">
+          <div class="notes__list--item notes__list-item--selected">
+            <div class="note__small--title">Jestem notatka</div>
+            <div class="note__small--content">Tresc notatki</div>
+            <div class="note__small--updated">Thursday 3:30pm</div>
+          </div>
         </div>
       </div>
-      <div class="notes">
-        <!-- <div class="note">
-          <div class="note-title">Zrobic pranie</div>
-          <div class="note-content">Zrobic pranie</div>
-        </div> -->
+      <div class="notes--preview">
+        <input type="text" class="note--title" placeholder="Enter a title..." />
+        <textarea class="note--content"></textarea>
       </div>
     </div>
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
   </body>
 </html>
-
-<!-- <div class="container">
-  <button class="add-note-btn">
-    
-  </button>
-  <div class="add-note-field">
-    <label for="note-title">Title: </label>
-    <input type="text" id="note-title" name="note-title" />
-    <label for="note-content">Content: </label>
-    <textarea type="text" id="note-content" name="note-content"></textarea>
-  </div>
-  <div class="notes">
-    <div class="note">
-      <div class="title">Notatka</div>
-      <div class="content">Treść notatki</div>
-    </div>
-  </div>
-</div>
- -->
